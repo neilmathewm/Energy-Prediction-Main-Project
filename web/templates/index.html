@@ -1,0 +1,89 @@
+<!-- #18bc9c COLOR CYAN
+  #2c3e50  DARK BLUE -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Energy Load Forecaster | Deep Learning</title>
+
+    <!-- Bootstrap core CSS -->
+    <link  href="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link href="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/css/freelancer.min.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase navbar-shrink" id="mainNav" style="height:60px">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top" style="font-size: 22px">Load Forecaster</a>
+        
+      </div>
+    </nav>
+
+
+    <!-- Portfolio Grid Section -->
+    <section class="portfolio" id="portfolio">
+      <div class="container">
+        <h3 class="text-center text-uppercase text-secondary mb-0">Predict the load</h3>
+        <hr class="star-dark mb-3">
+        <div ><br><br>
+          <center>
+            <form method="POST" enctype="multipart/form-data" role="form"> {% csrf_token %}
+            <input type="file" id="file" name="file" style="color:#18bc9c;border-color:#18bc9c " >
+          <!-- <button class="btn btn-primary" onclick="document.getElementById('file').click()">Choose Dataset</button>
+            --> <br><br>
+          <input type="checkbox" id="variable" name="variable" value="Temperature">&nbsp;<label>Temperature</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input type="checkbox" id="variable" name="variable" value="Humidity">&nbsp;<label>Humidity</label>
+              <br><br>
+              <input type="text" class="" style="border-radius: 4px;border-style:solid;color:#18bc9c" name="test_perc" id="test_perc" placeholder="Test  %"><br><br><br>
+              <button type="submit" class="btn btn-primary btn-lg col-md-2 col-md-offset-2" formaction="/predict/">Predict</button>
+            </form>
+          </center>
+        </div>
+      </div>
+    </section>
+
+    
+    
+
+   <br><br><br>
+    <div class="copyright py-3 text-center text-white">
+      <div class="container">
+        <small>Copyright  &copy; &nbsp;Load Forecaster 2018</small>
+      </div>
+    </div>
+
+    
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/jquery/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+
+
+  </body>
+
+</html>
