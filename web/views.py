@@ -7,6 +7,9 @@ from neural_without import neuralNetwork
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+from models import Document
+from forms import DocumentForm
+
 
 # Create your views here.
 def hello(request):
@@ -28,27 +31,38 @@ def main(request):
 
 
 def predict(request):
-	#file = request.FILES['file']
-	file = request.FILES.get("file")
+
 	BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-	print BASE_DIR
-	print file.name
-	print type(file),file
-	test_perc = request.POST.get("test_perc", "default")
-	print test_perc
+	file = request.FILES.get("file")
+	print request.POST,request.FILES #print requests
+	form = DocumentForm(request.FILES)
+	##path to save
+	print BASE_DIR+"\\media\\uploadedfile\\"+file.name
+	if(os.path.isfile(BASE_DIR+"\\media\\uploadedfile\\"+file.name)):
+		print "file exist"
+		os.remove(BASE_DIR+"\\media\\uploadedfile\\"+file.name)
+		print "old file removed"
+	else:
+		print "file not present"
 
-	neuralNetwork(file,test_perc);
-	# today = "tuesday"
-	# t = np.arange(0.0, 2.0, 0.01)
-	# s = 1 + np.sin(2*np.pi*t)
-	# plt.plot(t, s)
+	newdoc = Document(docfile = request.FILES['file'])
+	newdoc.save()
+	print "file saved successfully"
 
-	# plt.xlabel('time (s)')
-	# plt.ylabel('voltage (mV)')
-	# plt.title('About as simple as it gets, folks')
-	# plt.grid(True)
-	# plt.savefig("test.png")
-	# plt.show()
+	#get post parameters
+	period = request.POST.get("period", "default")
+	models={"neural":neuralNetwork(file,period),"linear":"","svm":"","lasso":"","theilsen":"","ard":""}
+	
+	print period
+	model = request.POST.getlist("model", "default")
+	for x in range(len(model)):
+		print model[x]
+		print models[model[x]]
+		k,j=models[model[x]]
+		print k,j
 
-	return render(request, "output.html", {"image_dir":BASE_DIR})
+	
+	#neuralNetwork(file,period)
+	
+	return render(request, "output.html", {"image_dir":'/static/'})
 

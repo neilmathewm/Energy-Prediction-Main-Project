@@ -24,8 +24,9 @@ def neuralNetwork(file,test_perc):
   yData=[]
   print("hello");
   # book = xlrd.open_workbook("data/data_only.xlsx")
+  print file
   BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-  book = xlrd.open_workbook("%s\data\%s"%(BASE_DIR,file))
+  book = xlrd.open_workbook("%s\media\uploadedfile\%s"%(BASE_DIR,file))
 
   sheet = book.sheet_by_index(0)
   for rx in range(1,sheet.nrows-1):
@@ -38,8 +39,8 @@ def neuralNetwork(file,test_perc):
       xData.append(row)
       yData.append(rowy)
     #print "cutoff"+str(cutoff)
-  print (xData)
-  print (yData)
+  #print (xData)
+  #print (yData)
   cutoff = len(xData)-89
   print(cutoff)
   xTrain = xData[0:cutoff]
@@ -104,9 +105,10 @@ def neuralNetwork(file,test_perc):
   
   preds.append(yTest)
   names.append("actual")
-
+  return err,trendedPred
   visualizer.comparisonPlot(2014,1,1,preds,names,plotName="Neural Network Load Predictions vs. Actual", 
         yAxisName="Predicted Kilowatts")
+
 
 # Constructs and fits a neural network with the given number of neurons
 # to the training data for the specified number of epochs and returns a 
