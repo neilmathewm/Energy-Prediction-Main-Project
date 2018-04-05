@@ -29,14 +29,14 @@
     <style>
       .chkbx{
         border-style:solid;
-        color:#e8b51e;
-        border-color:#e8b51e;
+        color:#2c3e50;
+        border-color:#2c3e50;
         border-width: 2px;
         border-radius: 7px ;
         font-weight: bold;
       }
       .chkbx:hover { 
-    background-color: #e8b51e;
+    background-color: #ffc107;
 }
     </style>
   </head>
@@ -55,17 +55,27 @@
     <!-- Portfolio Grid Section -->
     <section class="portfolio" id="portfolio">
       <div class="container">
-        <h3 class="text-center text-uppercase text-secondary mb-0">Predict the load</h3>
-        <hr class="star-dark mb-3">
-        <div ><br><br>
+        <h3 id="heading" class="text-center text-uppercase text-secondary mb-0" st><u>Predict the load</u></h3>
+        <center>
+        <div id="load-div" style="display:none"><img src="https://user-images.githubusercontent.com/17474002/38357429-3f054924-38e0-11e8-9d1d-a121cd17f0b8.gif" height="250px" width="250px"><br><br><br>
+          <h3>Please Wait While Training. . . .</h3><br><br><br><br>
+        </div>
+        </center>
+        <!-- 
+          https://user-images.githubusercontent.com/17474002/38356421-57babbaa-38dd-11e8-9b3c-35d3fe90884e.gif
+          https://user-images.githubusercontent.com/17474002/38357429-3f054924-38e0-11e8-9d1d-a121cd17f0b8.gif -->
+        <div id="page-content"><br><br>
           <center>
             <form method="POST" enctype="multipart/form-data" role="form"> {% csrf_token %}
             <input type="file" id="file" name="file"  hidden>
             <input type="button" onclick="document.getElementById('file').click()" value="Upload Dataset" style="color:white;font-size: 17px;font-weight: bold" class="btn btn-warning btn-md col-md-2 col-md-offset-1">
+
           <!-- <button class="btn btn-primary" onclick="document.getElementById('file').click()">Choose Dataset</button>
-            -->       <br><br><br>
-               <select name="period" style="border-radius: 4px;border-style:solid;color:#e8b51e;border-color:#e8b51e;border-width: 2px " >
-                  <option hidden value="" >--Choose Period--</option>
+            -->       
+            <!-- #e8b51e -->
+            <br><br><br>
+               <select name="period" style="border-radius: 4px;border-style:solid;color:#2c3e50;border-color:#2c3e50;border-width: 2px " >
+                  <option hidden value="" class="period">--Choose Period--</option>
                   <option value="7">1 Week</option>
                   <option value="30">1 Month</option>
                   <option value="60">2 Month</option>
@@ -82,8 +92,8 @@
               <input type="checkbox" name="model" value="lasso" > <label class="chkbx">&nbsp;Lasso-Lars Regressor &nbsp;</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input type="checkbox" name="model" value="theilsen" > <label class="chkbx">&nbsp; TheilSen Regressor &nbsp;</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input type="checkbox" name="model" value="ard" > <label class="chkbx">&nbsp;ARD Regressor &nbsp;</label>
-              <br><br><br>
-              <button type="submit" class="btn btn-primary btn-lg col-md-3 col-md-offset-2" formaction="/predict/">Predict & Compare</button>
+              <br><br><br><br>
+              <button type="submit" class="btn btn-primary btn-lg col-md-3 col-md-offset-2" onclick="showloading()" formaction="/predict/">Predict & Compare</button>
             </form>
           </center>
         </div>
@@ -93,7 +103,7 @@
     
     
 
-   <br><br>
+   
     <div class="copyright py-3 text-center text-white">
       <div class="container">
         <small>Copyright  &copy; &nbsp;Load Forecaster 2018</small>
@@ -115,3 +125,14 @@
   </body>
 
 </html>
+<script type="text/javascript">
+  function showloading()
+    {
+    var x = document.getElementById("load-div");
+    var y= document.getElementById("page-content");
+    var z= document.getElementById("heading");
+    x.style.display = "block";
+    y.style.display="none";
+    z.style.display="none";
+    }
+</script>

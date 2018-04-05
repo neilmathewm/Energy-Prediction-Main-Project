@@ -18,7 +18,7 @@ from django.contrib import admin
 from web.views import hello
 from web.views import passval
 from web.views import main
-from web.views import predict
+from web.views import predict,some
 admin.autodiscover()
 
 urlpatterns = [                 
@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^hello/',hello),
     url(r'^$',main),
     url(r'^predict/',predict),
+    url(r'^some/',some),
 ]
