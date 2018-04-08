@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from pandas.tools.plotting import autocorrelation_plot
 from pandas.tools.plotting import lag_plot
 from scipy import signal
+import os
 
 '''
 Module for time series visualization
@@ -58,6 +59,7 @@ def periodogramPlot(ySeries,plotName="Plot",xAxisName="Frequency",yAxisName="Fre
 def comparisonPlot(year,month,day,seriesList,nameList,plotName="Comparison of Values over Time", yAxisName="Predicted"):
 	date = datetime.date(year,month,day)
 	dateList = []
+	BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 	for x in range(len(seriesList[0])):
 		dateList.append(date+datetime.timedelta(days=x))
 	colors = ["b","g","r","c","m","y","k","w"]
@@ -73,6 +75,7 @@ def comparisonPlot(year,month,day,seriesList,nameList,plotName="Comparison of Va
 	plt.title(plotName)
 	plt.ylabel(yAxisName)
 	plt.xlabel("Date")
+	plt.savefig(BASE_DIR+"\\media\\images\\output1.png")
 	plt.savefig("output.png")
 	plt.show()
 	

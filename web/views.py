@@ -11,6 +11,7 @@ from forms import DocumentForm
 from regression import reg_linear,reg_svm,reg_lassolars,reg_theilsen,reg_ard
 from deepneural import neuralNetwork
 from createdata import fetch_data
+import visualizer
 
 # Create your views here.
 def hello(request):
@@ -58,31 +59,40 @@ def predict(request):
 	print "file saved successfully"
 
 	##Fetch data
-	if len(model)==1 and model[0]=="neural":
+	if len(model)==1 and model[0]=="Neural":
 		print "Only Neural Selected"
 	else:
 		print("Fetching Dataset")
 		xTrain,yTrain,xTest,yTest=fetch_data(file,period)
 	# neuralNetwork(xTrain,yTrain,xTest,yTest)
-	models={"neural":neuralNetwork,"linear":reg_linear,"svm":reg_svm,"lasso":reg_lassolars,"theilsen":reg_theilsen,"ard":reg_ard}
-	accu={"neural":0.0,"linear":0.0,"svm":0.0,"lasso":0.0,"theilsen":0.0,"ard":0.0}
-	pred={"neural":[],"linear":[],"svm":[],"lasso":[],"theilsen":[],"ard":[]}
-	mse={"neural":0.0,"linear":0.0,"svm":0.0,"lasso":0.0,"theilsen":0.0,"ard":0.0}
+	models={"Neural":neuralNetwork,"Linear Regression":reg_linear,"SVM":reg_svm,"Lasso-Lars Regression":reg_lassolars,"Theilsen Regression":reg_theilsen,"ARD":reg_ard}
+	accu={"Neural":0.0,"Linear Regression":0.0,"SVM":0.0,"Lasso-Lars Regression":0.0,"Theilsen Regression":0.0,"ARD":0.0}
+	pred={"Neural":[],"Linear Regression":[],"SVM":[],"Lasso-Lars Regression":[],"Theilsen Regression":[],"ARD":[]}
+	mse={"Neural":0.0,"Linear Regression":0.0,"SVM":0.0,"Lasso-Lars Regression":0.0,"Theilsen Regression":0.0,"ARD":0.0}
 	print period
-	
+	obj = []
+	preds = []
+	names = []
 	for x in range(len(model)):
 		print model[x]
 		#print models[model[x]]
-		if model[x]=="neural":
+		if model[x]=="Neural":
 			mse[model[x]],accu[model[x]],pred[model[x]],act=models[model[x]](file,period)
 		else:
 			mse[model[x]],accu[model[x]],pred[model[x]],act=models[model[x]](xTrain,yTrain,xTest,yTest)
 		
+		obj.append({'model':model[x],'mse':mse[model[x]],'accu':accu[model[x]]})
 		print "MSE: "+str(mse[model[x]]),"ACC :"+str(accu[model[x]])+"\n"
-		
-
+		preds.append(pred[model[x]])
+		names.append(model[x])
 	
+	preds.append(act)
+	names.append("Actual")
+	print obj
+	#print preds,names
 	#neuralNetwork(file,period)
-	
-	return render(request, "output.html", {"image_dir":'/static/'})
+	imgurl=BASE_DIR+"\\media\\images\\output1.png"
+	visualizer.comparisonPlot(2014,1,1,preds,names,plotName="Comparison of Prediction Models", 
+        yAxisName="Predicted Kilowatts")
+	return render(request, "output.html", {'obj':obj,'imgurl':imgurl})
 

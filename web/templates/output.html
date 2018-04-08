@@ -26,7 +26,11 @@
 
     <!-- Custom styles for this template -->
     <link href="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/css/freelancer.min.css" rel="stylesheet">
-
+    <style type="text/css">
+      a:hover {
+    color: red !important;
+    }
+    </style>
   </head>
 
   <body id="page-top">
@@ -35,7 +39,7 @@
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase navbar-shrink" id="mainNav" style="height:60px">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top" style="font-size: 22px">Load Forecaster</a>
-        
+        <a class="navbar-brand js-scroll-trigger" href="/" style="font-size: 12px;">Home</a>
       </div>
     </nav>
 
@@ -43,13 +47,46 @@
     <!-- Portfolio Grid Section -->
     <section class="portfolio" id="portfolio">
       <div class="container">
-        <h3 class="text-center text-uppercase text-secondary mb-0">Predicted Output {{image_dir}}</h3>
+        <h3 class="text-center text-uppercase text-secondary mb-0">Predicted Output {{imgurl}}</h3>
         <hr class="star-dark mb-3">
         <div ><br><br>
+          <!-- table starts -->
+                    <div class="row">
+          <div class="card col-md-10 text-xs-center text-md-center mbr-section-full" style="height: 400px; ">
+            <div id="dragandrophandler-inbox" style="height: 100%"><center><br>
+            
+                        <table class="table table-hover" style="font-size: 11px;">
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>MSE</th>
+                                    <th>Accuracy</th>
+                                    <th>Exec Time</th>
+                                </tr>
+                            </thead>
+                            {% for item in obj %}
+                            <tbody>
+                                <tr>
+                                    <td>{{ item.model }}</td>
+                                    <td>{{ item.mse }}</td>
+                                    <td>{{ item.accu }}</td>
+                                    <td>{{ item.mse }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+            
+</div>
+</div>
+</div>
+          <!-- table ends -->
+          <br>
           <center>
-            <image src="{{image_dir}}output.png" width="50%" height="50%">
+
+            <image src="{{imgurl}}" width="50%" height="50%">
           </center>
-        </div>
+        
       </div>
     </section>
 
