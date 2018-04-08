@@ -92,7 +92,7 @@ def predict(request):
 	#print preds,names
 	#neuralNetwork(file,period)
 	imgurl=BASE_DIR+"\\media\\images\\output1.png"
-	visualizer.comparisonPlot(2014,1,1,preds,names,plotName="Comparison of Prediction Models", 
+	visualizer.comparisonPlot(2014,1,1,preds,names,plotName="Comparison of Models based on the Predicted Load", 
         yAxisName="Predicted Kilowatts")
 	return render(request, "output.html", {'obj':obj,'imgurl':imgurl})
 

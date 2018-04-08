@@ -75,7 +75,7 @@ def comparisonPlot(year,month,day,seriesList,nameList,plotName="Comparison of Va
 	plt.title(plotName)
 	plt.ylabel(yAxisName)
 	plt.xlabel("Date")
-	plt.savefig(BASE_DIR+"\\media\\images\\output1.png")
-	plt.savefig("output.png")
-	plt.show()
+	plt.savefig(BASE_DIR+"\\static\\images\\output1.png")
+	#plt.savefig("output.png")
+	#plt.show()
 	
