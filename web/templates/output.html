@@ -14,18 +14,18 @@
     <title>Energy Load Forecaster | Deep Learning</title>
 
     <!-- Bootstrap core CSS -->
-    <link  href="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link  href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Plugin CSS -->
-    <link href="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="/static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/css/freelancer.min.css" rel="stylesheet">
+    <link href="/static/css/freelancer.min.css" rel="stylesheet">
     <style type="text/css">
       a:hover {
     color: red !important;
@@ -60,8 +60,8 @@
                                 <tr>
                                     <th>Model</th>
                                     <th>MSE</th>
-                                    <th>Accuracy</th>
-                                    <th>Exec Time</th>
+                                    <th>Accuracy %</th>
+                                    <th>Exec Time (sec)</th>
                                 </tr>
                             </thead>
                             {% for item in obj %}
@@ -70,7 +70,7 @@
                                     <td>{{ item.model }}</td>
                                     <td>{{ item.mse }}</td>
                                     <td>{{ item.accu }}</td>
-                                    <td>{{ item.mse }}</td>
+                                    <td>{{ item.time }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -84,7 +84,9 @@
           <br>
           <center>
 
-            <image src="/static/images/output1.png" width="70%" height="70%">
+            <image src="/static/images/output1.png" width="60%" height="60%">
+              <br><br>
+            <image src="/static/images/output2.png" width="60%" height="60%">
           </center>
         
       </div>
@@ -103,12 +105,12 @@
     
 
     <!-- Bootstrap core JavaScript -->
-    <script src="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/jquery/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="https://cdn.rawgit.com/neilmathewm/raw-files-for-main-project/168a1c2e/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
 
 

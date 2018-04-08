@@ -57,6 +57,7 @@ def periodogramPlot(ySeries,plotName="Plot",xAxisName="Frequency",yAxisName="Fre
 
 # Plots two time series on the same timeScale from a common date on the same plot
 def comparisonPlot(year,month,day,seriesList,nameList,plotName="Comparison of Values over Time", yAxisName="Predicted"):
+	print "inside ploting comparisonPlot"
 	date = datetime.date(year,month,day)
 	dateList = []
 	BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -79,3 +80,18 @@ def comparisonPlot(year,month,day,seriesList,nameList,plotName="Comparison of Va
 	#plt.savefig("output.png")
 	#plt.show()
 	
+def exectimeplot(times,name):	
+	print "inside exectimeplot"
+	BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+	fig, ax = plt.subplots()
+	print len(name),len(times),"length"
+	print name,times
+	ind  = np.arange(1, len(name)+1)
+	plt.bar(ind, times)
+	ax.set_xticks(ind)
+	ax.set_xticklabels(name)
+	ax.set_ylim([0,max(times)+1])
+	ax.set_ylabel('Time in sec')
+	ax.set_title('Comparison of Execution Time')
+	plt.savefig(BASE_DIR+"\\static\\images\\output2.png")
+	#plt.show()

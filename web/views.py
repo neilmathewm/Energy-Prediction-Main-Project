@@ -12,7 +12,7 @@ from regression import reg_linear,reg_svm,reg_lassolars,reg_theilsen,reg_ard
 from deepneural import neuralNetwork
 from createdata import fetch_data
 import visualizer
-
+import time
 # Create your views here.
 def hello(request):
    text = """<h1>welcome to my app !</h1>"""
@@ -63,7 +63,10 @@ def predict(request):
 		print "Only Neural Selected"
 	else:
 		print("Fetching Dataset")
+		fetchtime=time.time()
 		xTrain,yTrain,xTest,yTest=fetch_data(file,period)
+		fetchtime=time.time()-fetchtime
+		print("Time to fetch"+str(fetchtime))
 	# neuralNetwork(xTrain,yTrain,xTest,yTest)
 	models={"Neural":neuralNetwork,"Linear Regression":reg_linear,"SVM":reg_svm,"Lasso-Lars Regression":reg_lassolars,"Theilsen Regression":reg_theilsen,"ARD":reg_ard}
 	accu={"Neural":0.0,"Linear Regression":0.0,"SVM":0.0,"Lasso-Lars Regression":0.0,"Theilsen Regression":0.0,"ARD":0.0}
@@ -73,26 +76,37 @@ def predict(request):
 	obj = []
 	preds = []
 	names = []
+	name2=[]
+	times=[]
 	for x in range(len(model)):
 		print model[x]
+		
 		#print models[model[x]]
 		if model[x]=="Neural":
+			strt_time=time.time()
 			mse[model[x]],accu[model[x]],pred[model[x]],act=models[model[x]](file,period)
+			times.append(time.time()-strt_time-fetchtime)
 		else:
+			strt_time=time.time()
 			mse[model[x]],accu[model[x]],pred[model[x]],act=models[model[x]](xTrain,yTrain,xTest,yTest)
-		
-		obj.append({'model':model[x],'mse':mse[model[x]],'accu':accu[model[x]]})
+			times.append(time.time()-strt_time)
+
+		obj.append({'model':model[x],'mse':mse[model[x]],'accu':accu[model[x]],'time':times[x]})
 		print "MSE: "+str(mse[model[x]]),"ACC :"+str(accu[model[x]])+"\n"
 		preds.append(pred[model[x]])
 		names.append(model[x])
-	
+		name2.append(model[x])
+		
 	preds.append(act)
 	names.append("Actual")
 	print obj
+	print times
 	#print preds,names
 	#neuralNetwork(file,period)
 	imgurl=BASE_DIR+"\\media\\images\\output1.png"
 	visualizer.comparisonPlot(2014,1,1,preds,names,plotName="Comparison of Models based on the Predicted Load", 
         yAxisName="Predicted Kilowatts")
+
+	visualizer.exectimeplot(times,name2)
 	return render(request, "output.html", {'obj':obj,'imgurl':imgurl})
 
